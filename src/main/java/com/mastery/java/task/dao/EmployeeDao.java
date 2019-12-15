@@ -60,10 +60,10 @@ public class EmployeeDao implements EmployeeRepo {
 
     @Override
     public Employee getEmployeeById(int id) {
+        String sql = "SELECT * FROM employee WHERE employee_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new EmployeeRowMapper());
 
 
-        Employee employee = new Employee();
-        return employee;
     }
 
     @Override
