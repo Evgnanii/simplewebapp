@@ -59,7 +59,7 @@ public class EmployeeDao implements EmployeeRepo {
     }
 
     @Override
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(Long id) {
         String sql = "SELECT * FROM employee WHERE employee_id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new EmployeeRowMapper());
 

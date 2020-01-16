@@ -31,7 +31,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void getByIdTest() {
-        Employee employee = employeeDao.getEmployeeById(2);
+        Employee employee = employeeDao.getEmployeeById(2L);
         assertEquals("John", employee.getFirstName());
     }
 
@@ -46,7 +46,7 @@ public class EmployeeServiceTest {
     public void updateTest() {
         employeeDao.updateEmployee(new Employee("Dmitry", "Sergievich", new Date(1998, 1, 31), "HR manager", (long) 5, Gender.MALE), 11);
 
-        assertEquals("HR manager", employeeDao.getEmployeeById(11).getJobTitle());
+        assertEquals("HR manager", employeeDao.getEmployeeById(11L).getJobTitle());
     }
 
     @Test
