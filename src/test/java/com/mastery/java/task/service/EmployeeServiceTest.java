@@ -1,6 +1,6 @@
 package com.mastery.java.task.service;
 
-import com.mastery.java.task.dao.EmployeeDao;
+import com.mastery.java.task.dao.EmployeeDaoHibernate;
 import com.mastery.java.task.dto.Employee;
 import com.mastery.java.task.dto.Gender;
 import org.junit.Test;
@@ -21,38 +21,38 @@ import static junit.framework.TestCase.assertEquals;
 @Transactional
 public class EmployeeServiceTest {
     @Autowired
-    EmployeeDao employeeDao;
+    EmployeeDaoHibernate employeeDaoHibernate;
 
     @Test
     public void findAllTest() {
-        List<Employee> employees = employeeDao.listEmployers();
+        List<Employee> employees = (List<Employee>) employeeDaoHibernate.findAll();
         assertEquals(11, employees.size());
     }
 
     @Test
     public void getByIdTest() {
-        Employee employee = employeeDao.getEmployeeById(2L);
+        Employee employee = employeeDaoHibernate.findByEmployeeId(2L);
         assertEquals("John", employee.getFirstName());
     }
 
     @Test
     public void createTest() {
-        int size = employeeDao.listEmployers().size();
-        employeeDao.addEmployee(new Employee("Dmitry", "Sergievich", new Date(1998, 1, 31), "Manager", (long) 5, Gender.MALE));
-        assertEquals(size + 1, employeeDao.listEmployers().size());
+        int size = ((List<Employee>) employeeDaoHibernate.findAll()).size();
+        employeeDaoHibernate.save(new Employee("Dmitry", "Sergievich", new Date(1998, 1, 31), "Manager", (long) 5, Gender.MALE));
+        assertEquals(size + 1, ((List<Employee>) employeeDaoHibernate.findAll()).size());
     }
 
     @Test
     public void updateTest() {
-        employeeDao.updateEmployee(new Employee("Dmitry", "Sergievich", new Date(1998, 1, 31), "HR manager", (long) 5, Gender.MALE), 11);
+        employeeDaoHibernate.save(new Employee("Dmitry", "Sergievich", new Date(1998, 1, 31), "HR manager", (long) 5, Gender.MALE));
 
-        assertEquals("HR manager", employeeDao.getEmployeeById(11L).getJobTitle());
+        assertEquals("HR manager", employeeDaoHibernate.findByEmployeeId(11L).getJobTitle());
     }
 
     @Test
     public void deleteTest() {
-        int size = employeeDao.listEmployers().size();
-        employeeDao.removeEmployee(5);
-        assertEquals(size - 1, employeeDao.listEmployers().size());
+        int size = ((List<Employee>) employeeDaoHibernate.findAll()).size();
+        employeeDaoHibernate.deleteById(5L);
+        assertEquals(size - 1, ((List<Employee>) employeeDaoHibernate.findAll()).size());
     }
 }

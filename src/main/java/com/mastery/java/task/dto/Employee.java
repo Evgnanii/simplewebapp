@@ -25,7 +25,8 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Employee(String firstName, String lastName, Date dateOfBirth, String jobTitle, Long departmentId, Gender gender) {
+    public Employee(Long id, String firstName, String lastName, Date dateOfBirth, String jobTitle, Long departmentId, Gender gender) {
+        this.employeeId = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -33,6 +34,16 @@ public class Employee {
         this.departmentId = departmentId;
         this.gender = gender;
     }
+
+    public Employee( String firstName, String lastName, Date dateOfBirth, String jobTitle, Long departmentId, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.jobTitle = jobTitle;
+        this.departmentId = departmentId;
+        this.gender = gender;
+    }
+
 
     @Column(name = "job_title")
     private String jobTitle;

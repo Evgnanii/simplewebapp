@@ -44,7 +44,7 @@ public class EmployeeRestController {
         if (employee == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        this.employeeService.updateEmployee(employee, employee.getEmployeeId());
+        this.employeeService.updateEmployee(employee);
         return new ResponseEntity<>(employee, headers, HttpStatus.OK);
     }
 
@@ -60,7 +60,7 @@ public class EmployeeRestController {
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = this.employeeService.listEmployers();
+        List<Employee> employees = (List<Employee>) this.employeeService.listEmployers();
         if (employees == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

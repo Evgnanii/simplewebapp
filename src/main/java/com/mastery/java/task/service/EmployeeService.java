@@ -7,11 +7,11 @@ import java.util.List;
 public interface EmployeeService {
     public void addEmployee(Employee employee);
 
-    public void updateEmployee(Employee employee, long id);
+    public void updateEmployee(Employee employee);
 
-    public void removeEmployee(long id);
+    public void removeEmployee(Long id);
 
     public Employee getEmployeeById(Long id);
 
-    public List<Employee> listEmployers();
+    public Iterable<Employee> listEmployers();
 }
