@@ -1,7 +1,6 @@
 package com.mastery.java.task.rest;
 
 import com.mastery.java.task.dto.Employee;
-import com.mastery.java.task.dto.Gender;
 import com.mastery.java.task.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class EmployeeController {
                       @RequestParam String jobTitle,
                       @RequestParam Date dateOfBirth,
                       Map<String, Object> model) {
-        Employee employee = new Employee(firstName, lastName, dateOfBirth, jobTitle, departmentId, Gender.valueOf(gender));
+        Employee employee = new Employee(firstName, lastName, dateOfBirth, jobTitle, departmentId, gender);
         employeeServiceImpl.addEmployee(employee);
         List<Employee> employees = employeeServiceImpl.listEmployers();
         model.put("employers", employees);
@@ -58,12 +57,10 @@ public class EmployeeController {
             @RequestParam Long id,
             @RequestParam Date dateOfBirth,
             Map<String, Object> model) {
-        Employee employee = new Employee(id,firstName, lastName, dateOfBirth, jobTitle, departmentId, Gender.valueOf(gender));
+        Employee employee = new Employee(id, firstName, lastName, dateOfBirth, jobTitle, departmentId, gender);
         employeeServiceImpl.updateEmployee(employee);
         Iterable<Employee> employees = employeeServiceImpl.listEmployers();
         model.put("employers", employees);
         return "Employee";
     }
-
-
 }

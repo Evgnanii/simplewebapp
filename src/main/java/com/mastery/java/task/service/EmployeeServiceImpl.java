@@ -2,34 +2,52 @@ package com.mastery.java.task.service;
 
 import com.mastery.java.task.dao.EmployeeDaoHibernate;
 import com.mastery.java.task.dto.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeDaoHibernate employeeDaoHibernate;
+    Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     @Override
-    public void addEmployee(Employee employee) {employeeDaoHibernate.save(employee);
+    public Employee addEmployee(Employee employee) {
+        logger.debug("User tried to add a new employee " + employee);
+        employeeDaoHibernate.save(employee);
+        logger.info("Created new employee with id" + employee.getEmployeeId());
+        logger.debug("Created new employee " + employee);
+        return employee;
+
     }
 
     @Override
     public void updateEmployee(Employee employee) {
+        logger.debug("User tried to update the employee with id " + employee.getEmployeeId() + "to " + employee);
         employeeDaoHibernate.save(employee);
+        logger.info("Employee with id " + employee.getEmployeeId() + "was updated");
+        logger.debug("Employee with id " + employee.getEmployeeId() + "was updated to " + employee);
     }
 
     @Override
     public void removeEmployee(Long id) {
+        logger.debug("User tried to delete the employee with id " + id);
         employeeDaoHibernate.deleteById(id);
+        logger.info("Employee with id " + id + "was deleted");
+
     }
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return  employeeDaoHibernate.findByEmployeeId(id);
+        logger.debug("User tried to get the employee with id " + id);
+        logger.info("The user received data about employee with id " + id);
+        return employeeDaoHibernate.findByEmployeeId(id);
     }
 
     @Override
