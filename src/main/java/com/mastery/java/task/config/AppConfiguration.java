@@ -24,7 +24,7 @@ public class AppConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("/api/*"))
+                .paths(PathSelectors.ant("/employees/*"))
                 .build().apiInfo(apiDetails());
     }
 

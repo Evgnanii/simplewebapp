@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
-
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -106,6 +105,10 @@ public class Employee {
         this.departmentId = departmentId;
     }
 
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return
@@ -119,7 +122,5 @@ public class Employee {
                 ;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
+
 }
