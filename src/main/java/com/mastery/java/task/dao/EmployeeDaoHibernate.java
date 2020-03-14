@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmployeeDaoHibernate extends JpaRepository<Employee, Long> {
     Employee findByEmployeeId(Long id);
-
 }

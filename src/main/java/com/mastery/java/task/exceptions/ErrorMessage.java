@@ -1,6 +1,5 @@
 package com.mastery.java.task.exceptions;
 
-import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 

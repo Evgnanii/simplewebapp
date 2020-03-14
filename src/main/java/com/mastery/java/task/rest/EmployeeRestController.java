@@ -1,5 +1,6 @@
 package com.mastery.java.task.rest;
 
+
 import com.mastery.java.task.dto.Employee;
 import com.mastery.java.task.exceptions.EmployeeAlreadyExistsException;
 import com.mastery.java.task.exceptions.NoEmployeesException;
@@ -11,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/employees/")
 public class EmployeeRestController {
+
     @Autowired
     private EmployeeService employeeService;
     Logger logger = LoggerFactory.getLogger(EmployeeRestController.class);
@@ -31,6 +32,7 @@ public class EmployeeRestController {
             logger.debug("Get. Where is no employee with id {}", employeeId);
             throw new NoSuchEmployeeException("There is no employee with id " + employeeId);
         }
+
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
@@ -40,21 +42,22 @@ public class EmployeeRestController {
     public ResponseEntity<Employee> addEmployee(@RequestBody @Valid Employee employee) {
         HttpHeaders headers = new HttpHeaders();
         if (employeeService.getEmployeeById(employee.getEmployeeId()) != null) {
-            throw new EmployeeAlreadyExistsException("There is no employee with id "+ employee.getEmployeeId()+ ". You can create it with Post method");
+            throw new EmployeeAlreadyExistsException("There is no employee with id " + employee.getEmployeeId() + ". You can create it with Post method");
         }
         this.employeeService.addEmployee(employee);
+
         return new ResponseEntity<>(employee, headers, HttpStatus.CREATED);
     }
 
-    @PutMapping()
+    @PutMapping("/{employee_id}")
     @ApiOperation(value = "Employee update",
             notes = "If you want to update the employee - use it")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee) {
+    public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid Employee employee, @PathVariable("employee_id") Long employeeId) {
         HttpHeaders headers = new HttpHeaders();
-        if (employeeService.getEmployeeById(employee.getEmployeeId()) == null) {
-            throw new NoEmployeesException("There is no employee with id "+ employee.getEmployeeId()+ ". You can create it with Post method");
+        if (employeeService.getEmployeeById(employeeId) == null) {
+            throw new NoEmployeesException("There is no employee with id " + employee.getEmployeeId() + ". You can create it with Post method");
         }
-        this.employeeService.updateEmployee(employee);
+        this.employeeService.updateEmployee(employee, employeeId);
         return new ResponseEntity<>(employee, headers, HttpStatus.OK);
     }
 
@@ -80,7 +83,13 @@ public class EmployeeRestController {
             logger.debug("Delete. Where are no employees in DB");
             throw new NoEmployeesException("There are no employees");
         }
+
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
+    @PutMapping("/{department_id}/{new_title}")
+    public ResponseEntity<List<Employee>> updateTitlesByDepartmentId(@PathVariable("department_id") Long departmentId, @PathVariable("new_title") String newTitle) {
+        List<Employee> employees = employeeService.updateTitlesByDepartmentId(departmentId, newTitle);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
+    }
 }

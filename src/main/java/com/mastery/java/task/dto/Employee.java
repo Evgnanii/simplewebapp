@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -121,6 +122,4 @@ public class Employee {
                         ", gender=" + gender
                 ;
     }
-
-
 }

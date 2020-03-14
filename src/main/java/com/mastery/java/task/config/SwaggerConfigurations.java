@@ -18,7 +18,7 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
-public class AppConfiguration {
+public class SwaggerConfigurations {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
