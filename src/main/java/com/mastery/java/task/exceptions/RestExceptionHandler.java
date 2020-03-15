@@ -23,11 +23,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(errorMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(BadRequestBodyException.class)
-    public ResponseEntity<Object> handleBadRequestBodyException(BadRequestBodyException c) {
-        ErrorMessage errorMessage = new ErrorMessage(new Date(), c.getMessage());
-        return new ResponseEntity(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
-    }
     @ExceptionHandler(EmployeeAlreadyExistsException.class)
     public ResponseEntity<Object> handleBadRequestBodyException(EmployeeAlreadyExistsException c) {
         ErrorMessage errorMessage = new ErrorMessage(new Date(), c.getMessage());

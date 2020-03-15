@@ -4,9 +4,12 @@ package com.mastery.java.task.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -14,6 +17,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 @EnableSwagger2
@@ -24,8 +29,9 @@ public class SwaggerConfigurations {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.ant("/employees/*"))
-                .build().apiInfo(apiDetails());
+                .paths(PathSelectors.ant("/employees/**"))
+                .build().apiInfo(apiDetails()).useDefaultResponseMessages(false)
+                ;
     }
 
     private ApiInfo apiDetails() {
