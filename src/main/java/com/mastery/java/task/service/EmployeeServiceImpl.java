@@ -1,6 +1,6 @@
 package com.mastery.java.task.service;
 
-import com.mastery.java.task.ActiveMQ.Message;
+import com.mastery.java.task.ActiveMQ.MyMessage;
 import com.mastery.java.task.ActiveMQ.Producer;
 import com.mastery.java.task.dao.EmployeeDaoHibernate;
 import com.mastery.java.task.dto.Employee;
@@ -63,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void sendMessage(Long id, String title) {
-        Message message = new Message(id, title);
+        MyMessage message = new MyMessage(id, title);
         producer.sendMessage(message);
     }
 

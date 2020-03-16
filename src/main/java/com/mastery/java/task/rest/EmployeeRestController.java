@@ -114,10 +114,7 @@ public class EmployeeRestController {
     @ApiOperation(value = "Update employees job title by department ID",
             notes = "Update employees and lists updated workers in response")
     public ResponseEntity<List<Employee>> updateTitlesByDepartmentId(@PathVariable("department_id") Long departmentId, @PathVariable("new_title") String newTitle) {
-        List<Employee> employees = employeeService.updateTitlesByDepartmentId(departmentId, newTitle);
-        if (employees.isEmpty()) {
-            throw new NoEmployeesException("There are no employees with department id " + departmentId);
-        }
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+        employeeService.sendMessage(departmentId, newTitle);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
