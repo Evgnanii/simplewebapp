@@ -13,7 +13,7 @@ public class ActiveMQConfigurations {
     MappingJackson2MessageConverter messageConverter() {
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
         messageConverter.setTypeIdPropertyName("content-type");
-        messageConverter.setTypeIdMappings(Collections.singletonMap("message", MyMessage.class));
+        messageConverter.setTypeIdMappings(Collections.singletonMap("MyMessage", MyMessage.class));
         return messageConverter;
     }
 

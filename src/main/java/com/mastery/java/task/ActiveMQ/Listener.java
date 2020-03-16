@@ -14,7 +14,7 @@ public class Listener {
     EmployeeService employeeService;
     Logger logger = LoggerFactory.getLogger(Listener.class);
 
-    @JmsListener(destination = "UpdatesByDepartmentID")
+    @JmsListener(destination = "UpdatesByDepartmentID1")
     public void receiveMessage(MyMessage message) {
         logger.info("Listener take message "+ message.toString());
         employeeService.updateTitlesByDepartmentId(message.getId(), message.getTitle());
